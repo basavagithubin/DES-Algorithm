@@ -1,0 +1,25 @@
+import java.util.*;
+import javax.crypto.*;
+import java.io.*;
+public class Main
+{
+	public static void main(String[] args)throws Exception {
+	    Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the text");
+		String str=sc.nextLine();
+		KeyGenerator kg=KeyGenerator.getInstance("DES");
+		SecretKey sk=kg.generateKey();
+		byte[] text=str.getBytes();
+		System.out.println("The text  in Bytes are "+text);
+		System.out.println("The text  in Bytes are "+new String(text));
+		Cipher c=Cipher.getInstance("DES");
+		c.init(Cipher.ENCRYPT_MODE,sk);
+		byte[] encrypt=c.doFinal(text);
+		System.out.println("The encrypt text  in Bytes are "+ encrypt);
+		System.out.println("The encrypt text  in Bytes are "+new String(encrypt));
+		c.init(Cipher.DECRYPT_MODE,sk);
+		byte[] decrypt=c.doFinal(encrypt);
+		System.out.println("The decrypt  text  in Bytes are "+new String(decrypt));
+		
+	}
+}
